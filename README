@@ -1,4 +1,78 @@
-tag-tree
-========
+Tagtree is a simple tool for keeping data in tagged structures with
+use of hardlinks.
 
-Simple tool for keeping data in tagged structures with use of hardlinks
+The main dedication is to keep files int the directory organised with
+some tags. So if you have for instance book 'Mathematical basics of
+physics' you can put it both into 'math' and 'physics' folders, the
+tagtree will find identical files and replace them with hard links.
+
+The main advantages over many file-tagging frameworks is:
+1. you are not bound to certain DE or file manager which will show you
+needed tags;
+2. once tag tree is initialised the needed way you can operate with
+tagged files like with absolutely ordinary file structure: creating
+directories (which will be interpreted as tags and subtags), placing
+and moving files between different tags. The only thing you need once
+in a while update tagtree structure. All configurations and data will
+be stored in .tt/ directory;
+3. selected viewable tags will stay that way until you will manually
+choose to hide them (while in other tagging systems you need to look
+for needed tags each time).
+
+
+STRUCTURE
+
+All meta information will be stored in .tt directory. It is organised
+like:
+
+.tt/
++ meta
++ files
+| + <file-0-md5>
+| + <file-1-md5>
+| + <file-2-md5>
+| + <file-3-md5>
+| + ...
++ config
+
+Here 'meta' file contains info about each file under tagtree control
+(its tags, description if there is such and else) and each tag (tag
+class, description if there is such and other). This file is organised
+in form of sqlite database.
+
+Files 'file-n-md5' are just files. It is the base in which all files
+are situated. The names are md5 made for this files last tagtree
+update.
+
+Config file 'config' contains all current tagtree settings in simple
+text format.
+
+
+USAGE
+
+Initialise tagtree structure in current path:
+
+$ tagtree-cli init
+
+Update tagtree structure according to the current directory content:
+
+$ tagtree-cli update
+
+Hide tag:
+
+$ tagtree-cli hide <tag>
+
+This will delete directory <tag>. Files of this tag will still be
+there but you will see them only in .all directory if it exists. This
+tag directory can be re-created again with next command.
+
+Show tag:
+
+$ tagtree-cli reveal <tag>
+
+
+HINTS
+
+Tagtree can be used with tagtree-cli utility. But for more convenient
+and fast access you can make alias in your shell to something like
+'ttcli' or 'tt'.
