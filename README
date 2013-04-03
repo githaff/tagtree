@@ -71,6 +71,13 @@ Show tag:
 $ tagtree-cli reveal <tag>
 
 
+CONFIGURATION
+
+Tagtree configuration presented in several levels: global
+(/etc/tagtree.conf), user (~/.tagtree) and tagtree instance
+(<tagtree-dif>/.tt/config).
+
+
 HINTS
 
 Tagtree can be used with tagtree-cli utility. But for more convenient
