@@ -48,7 +48,117 @@ Config file 'config' contains all current tagtree settings in simple
 text format.
 
 
-USAGE
+COMMANDS
+
+init - initialize tagtree in current directory. All files will be
+    automaitcly registered and tags for each directory will be created.
+
+update [PATH] - update tagtree state. Register all changes (newly
+    added and removed files/tags). Optionally path to update may be
+    passed. In this case only files and tags placed there will be
+    rechecked in tag tree.
+
+reveal TAG|TAG_EXPR - this will create directory TAG in current path
+    which will represent specified tag. It also will reveal all
+    subtags so
+
+    $ tagtree reveal books
+
+    will create directory 'book' with all subtags like 'datasheets',
+    'languages' etc.
+
+    You also can reveal certain subtags like it is usual tags (which
+    it is).  To reveal only needed subtags in some tag one can use
+
+    $ tagtree reveal TAG/SUBTAG
+
+    For instance
+
+    $ tagtree reveal books/datasheets
+    $ tagtree reveal books/languages
+
+    will create only 'datasheets' and 'languages' in directory 'books'
+    without other subtags like 'fiction' or 'math'.
+
+    In place of tag name to reveal some binary expression can be
+    used. In this case option --as NAME must also be used to specify
+    desired name for revealed tag. For example to reveal tag
+    'literature' which will contain both 'fiction' and 'fantasy' one
+    can use:
+
+    $ tagtree reveal --as literature fiction -a fantasy
+
+    You can see full description of binary operations with tags in
+    section 'Tag expressions'.
+
+    Note that this way of revealing created through expressions tags
+    isn't permanent, it will be terminated after first 'tagtree hide'
+    on this tag. To use permanent expression-originated tags one can
+    use 'alias' command. It is also possible to use 'create' in case
+    new tag must contain only current slice of files that satisfy
+    specified tag expression.
+
+    Options:
+        --as NAME  Reveal tag with specified pseudonym
+
+
+hide TAG - apposite to 'reveal' command. Deletes tag directory but not
+    complitely - it can be restored with 'reveal' again any time.
+
+alias ALIAS_NAME TAG_EXPR - create alias for tag expression. Created
+    aliased tag will be all the time equivalen to expression (with
+    periodical 'update' command calls of course). For example if you
+    have file-1.txt in tag-1 and file-2.txt in tag-2 then after
+
+    $ tagtree alias tag-new tag-1 -a tag-2
+
+    created tag-new will contain both tag-1 and tag-2. In case you
+    will place new file file-3.txt into tag-1 after update it will
+    appear also in tag-new.
+
+create TAG_NAME [TAG_EXPR] - create new tag based on specified tag
+    expression. In difference with 'alias' command 'create' will
+    permanently create absolutly ordinary tag which will contain all
+    files that satisfy tag expression. In comparison with 'alias' if
+    you have file-1.txt in tag-1 and file-2.txt in tag-2 then after
+
+    $ tagtree create tag-new tag-1 -a tag-2
+
+    you will have also both file-1.txt and file-2.txt in created
+    tag-new tag. But if you will add file-3.txt to tag-1 it will not
+    appear at tag-new.
+
+    Tag expression can be ommitted. In this case simple empty tag
+    TAG_NAME will be created.
+
+destroy TAG... - fully destroy specified tag. It will not be possible
+    to resurrect it with 'reveal' afterwords. Files that was stored
+    only in deleted tag will be deleted from tagtree completly.  More
+    that one tag can be passed for destruction. Destruction of tag
+    means also destruction of all subtags if they are not parented by
+    some other tag (or in top-level).
+
+config VARIABLE VALUE - customize tagtree by specifying value for all
+    customizing variables.
+
+    Options:
+        --global - change global tatree options instead of local to
+                   particular tagtree instance.
+
+show [TAG] - show info about specified tag (subtags, files owned, date
+    of creation).
+    Options:
+        --all - print all available info
+        --files - print all files contained in this tag
+
+help [COMMAND] - show this help. If command specified - print help for
+    it.
+
+
+TAG EXPRESSIONS
+.................... TODO ............................
+
+BASIC USAGE
 
 Initialise tagtree structure in current path:
 
