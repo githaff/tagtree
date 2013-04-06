@@ -156,7 +156,27 @@ help [COMMAND] - show this help. If command specified - print help for
 
 
 TAG EXPRESSIONS
-.................... TODO ............................
+
+Tag expressions can be used for applying boolean operations on tags as
+sets of files. For each basic operation there is two crutial moments:
+whilch files will be shown in created that way tag and to which tags
+file will be placed if it will be created at this expression tag.
+
+Basic operations:
+
+-a - AND. Show files which are present both in tag-1 and tag-2. When
+added file will be placed both into tag-1 and tag-2.
+
+-o - OR. Show files which are present in tag-1 or in tag-2. Added file
+will be placed both into tag-1 and tag-2.
+
+-n - NOT. Show files which are present anywhere but in tag-1. Added
+file will be placed in all other tags except tag-1.
+
+-w - WITHOUT. [boolean subtraction. TODO: must be overchecked]. Same
+as OR NOT. Will show files that belong to tag-1 but not belong to
+tag-2. Added file will be added to tag-1.
+
 
 BASIC USAGE
 
