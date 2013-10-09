@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-#include "tagtree/init.h"
+#include "trut/init.h"
 
 
 int main(int argc, char *argv[])
 {
-    printf("Print from tagtree client\n");
+    printf("Print from trut client\n");
     func();
     
     return 0;

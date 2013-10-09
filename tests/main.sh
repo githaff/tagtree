@@ -3,7 +3,7 @@
 
 ## Manage temporary directory for testing
 init_tmp () {
-    TEST_DIR="$(mktemp -d \"tagtree-tests.XXXXXXXXXX\")"
+    TEST_DIR="$(mktemp -d \"trut-tests.XXXXXXXXXX\")"
 }
 
 deinit_tmp () {
@@ -38,7 +38,7 @@ test_fail () {
 
 
 
-echo "Testing tagtree..."
+echo "Testing trut..."
 
 init_tmp
 

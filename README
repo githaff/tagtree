@@ -1,10 +1,10 @@
-Tagtree is a simple tool for keeping data in tagged structures with
+Trut is a simple tool for keeping data in tagged structures with
 use of hardlinks.
 
 The main dedication is to keep files int the directory organised with
 some tags. So if you have for instance book 'Mathematical basics of
 physics' you can put it both into 'math' and 'physics' folders, the
-tagtree will find identical files and replace them with hard links.
+trut will find identical files and replace them with hard links.
 
 The main advantages over many file-tagging frameworks is:
 1. you are not bound to certain DE or file manager which will show you
@@ -13,7 +13,7 @@ needed tags;
 tagged files like with absolutely ordinary file structure: creating
 directories (which will be interpreted as tags and subtags), placing
 and moving files between different tags. The only thing you need once
-in a while update tagtree structure. All configurations and data will
+in a while update trut structure. All configurations and data will
 be stored in .tt/ directory;
 3. selected viewable tags will stay that way until you will manually
 choose to hide them (while in other tagging systems you need to look
@@ -35,25 +35,25 @@ like:
 | + ...
 + config
 
-Here 'meta' file contains info about each file under tagtree control
+Here 'meta' file contains info about each file under trut control
 (its tags, description if there is such and else) and each tag (tag
 class, description if there is such and other). This file is organised
 in form of sqlite database.
 
 Files 'file-n-md5' are just files. It is the base in which all files
-are situated. The names are md5 made for this files last tagtree
+are situated. The names are md5 made for this files last trut
 update.
 
-Config file 'config' contains all current tagtree settings in simple
+Config file 'config' contains all current trut settings in simple
 text format.
 
 
 COMMANDS
 
-init - initialize tagtree in current directory. All files will be
+init - initialize trut in current directory. All files will be
     automaitcly registered and tags for each directory will be created.
 
-update [PATH] - update tagtree state. Register all changes (newly
+update [PATH] - update trut state. Register all changes (newly
     added and removed files/tags). Optionally path to update may be
     passed. In this case only files and tags placed there will be
     rechecked in tag tree.
@@ -62,7 +62,7 @@ reveal TAG|TAG_EXPR - this will create directory TAG in current path
     which will represent specified tag. It also will reveal all
     subtags so
 
-    $ tagtree reveal books
+    $ trut reveal books
 
     will create directory 'book' with all subtags like 'datasheets',
     'languages' etc.
@@ -70,12 +70,12 @@ reveal TAG|TAG_EXPR - this will create directory TAG in current path
     You also can reveal certain subtags like it is usual tags (which
     it is).  To reveal only needed subtags in some tag one can use
 
-    $ tagtree reveal TAG/SUBTAG
+    $ trut reveal TAG/SUBTAG
 
     For instance
 
-    $ tagtree reveal books/datasheets
-    $ tagtree reveal books/languages
+    $ trut reveal books/datasheets
+    $ trut reveal books/languages
 
     will create only 'datasheets' and 'languages' in directory 'books'
     without other subtags like 'fiction' or 'math'.
@@ -86,13 +86,13 @@ reveal TAG|TAG_EXPR - this will create directory TAG in current path
     'literature' which will contain both 'fiction' and 'fantasy' one
     can use:
 
-    $ tagtree reveal --as literature fiction -a fantasy
+    $ trut reveal --as literature fiction -a fantasy
 
     You can see full description of binary operations with tags in
     section 'Tag expressions'.
 
     Note that this way of revealing created through expressions tags
-    isn't permanent, it will be terminated after first 'tagtree hide'
+    isn't permanent, it will be terminated after first 'trut hide'
     on this tag. To use permanent expression-originated tags one can
     use 'alias' command. It is also possible to use 'create' in case
     new tag must contain only current slice of files that satisfy
@@ -110,7 +110,7 @@ alias ALIAS_NAME TAG_EXPR - create alias for tag expression. Created
     periodical 'update' command calls of course). For example if you
     have file-1.txt in tag-1 and file-2.txt in tag-2 then after
 
-    $ tagtree alias tag-new tag-1 -a tag-2
+    $ trut alias tag-new tag-1 -a tag-2
 
     created tag-new will contain both tag-1 and tag-2. In case you
     will place new file file-3.txt into tag-1 after update it will
@@ -122,7 +122,7 @@ create TAG_NAME [TAG_EXPR] - create new tag based on specified tag
     files that satisfy tag expression. In comparison with 'alias' if
     you have file-1.txt in tag-1 and file-2.txt in tag-2 then after
 
-    $ tagtree create tag-new tag-1 -a tag-2
+    $ trut create tag-new tag-1 -a tag-2
 
     you will have also both file-1.txt and file-2.txt in created
     tag-new tag. But if you will add file-3.txt to tag-1 it will not
@@ -133,17 +133,17 @@ create TAG_NAME [TAG_EXPR] - create new tag based on specified tag
 
 destroy TAG... - fully destroy specified tag. It will not be possible
     to resurrect it with 'reveal' afterwords. Files that was stored
-    only in deleted tag will be deleted from tagtree completly.  More
+    only in deleted tag will be deleted from trut completly.  More
     that one tag can be passed for destruction. Destruction of tag
     means also destruction of all subtags if they are not parented by
     some other tag (or in top-level).
 
-config VARIABLE VALUE - customize tagtree by specifying value for all
+config VARIABLE VALUE - customize trut by specifying value for all
     customizing variables.
 
     Options:
         --global - change global tatree options instead of local to
-                   particular tagtree instance.
+                   particular trut instance.
 
 show [TAG] - show info about specified tag (subtags, files owned, date
     of creation).
@@ -180,17 +180,17 @@ tag-2. Added file will be added to tag-1.
 
 BASIC USAGE
 
-Initialise tagtree structure in current path:
+Initialise trut structure in current path:
 
-$ tagtree-cli init
+$ trut-cli init
 
-Update tagtree structure according to the current directory content:
+Update trut structure according to the current directory content:
 
-$ tagtree-cli update
+$ trut-cli update
 
 Hide tag:
 
-$ tagtree-cli hide <tag>
+$ trut-cli hide <tag>
 
 This will delete directory <tag>. Files of this tag will still be
 there but you will see them only in .all directory if it exists. This
@@ -198,18 +198,18 @@ tag directory can be re-created again with next command.
 
 Show tag:
 
-$ tagtree-cli reveal <tag>
+$ trut-cli reveal <tag>
 
 
 CONFIGURATION
 
-Tagtree configuration presented in several levels: global
-(/etc/tagtree.conf), user (~/.tagtree) and tagtree instance
-(<tagtree-dif>/.tt/config).
+Trut configuration presented in several levels: global
+(/etc/trut.conf), user (~/.trut) and trut instance
+(<trut-dif>/.tt/config).
 
 
 HINTS
 
-Tagtree can be used with tagtree-cli utility. But for more convenient
+Trut can be used with trut-cli utility. But for more convenient
 and fast access you can make alias in your shell to something like
 'ttcli' or 'tt'.

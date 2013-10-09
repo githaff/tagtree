@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-#include "tagtree/init.h"
+#include "trut/init.h"
 
 
 void func()
 {
-    printf("Print tagtree library\n");
+    printf("Print trut library\n");
 }

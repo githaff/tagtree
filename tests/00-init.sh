@@ -1,10 +1,10 @@
 #!/bin/sh
 
-# Test base tagtree initializing
+# Test base trut initializing
 
 
 init_tmp () {
-    TEST_DIR="$(mktemp -d \"tagtree-tests.XXXXXXXXXX\")"
+    TEST_DIR="$(mktemp -d \"trut-tests.XXXXXXXXXX\")"
 }
 
 

@@ -1,9 +1,9 @@
 cmake_minimum_required (VERSION 2.8)
 
 ### Name of whole complex
-set (PROJECT "tagtree")
-set (PROJECT_CLI "tagtree-cli")
-set (PROJECT_LIB "tagtree")
+set (PROJECT "trut")
+set (PROJECT_CLI "trut-cli")
+set (PROJECT_LIB "trut")
 project (${PROJECT})
 
 ### Project directories
