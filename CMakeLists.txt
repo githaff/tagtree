@@ -2,8 +2,8 @@ cmake_minimum_required (VERSION 2.8)
 
 ### Name of whole complex
 set (PROJECT "trut")
-set (PROJECT_CLI "trut-cli")
-set (PROJECT_LIB "trut")
+set (PROJECT_CLI "trut")
+set (PROJECT_LIB "trut-lib")
 project (${PROJECT})
 
 ### Project directories
@@ -30,6 +30,7 @@ include_directories (${INCLUDE_DIR})
 
 ### Build library
 add_library (${PROJECT_LIB} SHARED ${SOURCES_LIB} ${HEADERS_LIB})
+set_target_properties(${PROJECT_LIB} PROPERTIES OUTPUT_NAME ${PROJECT}) 
 set_target_properties (${PROJECT_LIB}
   PROPERTIES
   LIBRARY_OUTPUT_DIRECTORY ${BUILD_DIR})
