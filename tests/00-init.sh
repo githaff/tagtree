@@ -1,12 +1,20 @@
 #!/bin/sh
 
-# Test base trut initializing
+######################## Test initialization ########################
+
+TEST_NAME="Initialization test"
+
+TRUT_EXEC="${1}"
+TEST_DIR="${2}"
+SCRIPT_DIR="$(pwd)"
+
+source "${SCRIPT_DIR}/functions.sh"
+cd "${TEST_DIR}"
 
 
-init_tmp () {
-    TEST_DIR="$(mktemp -d \"trut-tests.XXXXXXXXXX\")"
-}
+############################# Test body #############################
 
-
+${TRUT_EXEC}
 
 exit 1
+
