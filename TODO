@@ -1,0 +1,3 @@
+* add test for initializing on unsupported FS (which doesn't have hard
+  links);
+* implement plugins framework;
