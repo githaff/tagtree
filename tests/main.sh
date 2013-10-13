@@ -29,6 +29,10 @@ EOF
 
 
 ## Manage temporary directory for testing
+clean_prev_tmp () {
+    rm -rf "/tmp/trut-tests."*
+}
+
 init_tmp () {
     mktemp -d "/tmp/trut-tests.XXXXXXXXXX"
 }
@@ -94,6 +98,7 @@ parse_arguments () {
 ############################## Testing procedure ##############################
 
 parse_arguments $@
+clean_prev_tmp
 
 echo "Testing trut..."
 
