@@ -2,12 +2,16 @@
 
 ### Trut testing functions ###
 
+
+# Initialize trut
 trut_init () {
     echo -n "Initializing trut..."
     $TRUT init
     echo "OK"
 }
 
+# Check files existance
+# @FILE_NAME --- files path relative to trut direcotry
 trut_check_file () {
     local FILE_NAME=${1}
     echo "Checking if file '${FILE_NAME}' exists..."
@@ -19,6 +23,8 @@ trut_check_file () {
     fi
 }
 
+# Check directory existance
+# @DIR_NAME --- files path relative to trut direcotry
 trut_check_dir () {
     local DIR_NAME=${1}
     echo -n "Checking if directory '${DIR_NAME}' exists..."
