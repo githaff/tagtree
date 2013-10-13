@@ -4,7 +4,7 @@
 
 TEST_NAME="Initialization test"
 
-TRUT_EXEC="${1}"
+TRUT="${1}"
 TEST_DIR="${2}"
 SCRIPT_DIR="$(pwd)"
 
@@ -14,7 +14,4 @@ cd "${TEST_DIR}"
 
 ############################# Test body #############################
 
-${TRUT_EXEC}
-
-exit 1
-
+trut_init

@@ -63,8 +63,8 @@ test_fail () {
 }
 
 
-SCRIPT_DIR="$(pwd)"
-TRUT_EXEC="${SCRIPT_DIR}/../bin/trut"
+SCRIPT_DIR="$(readlink -f $(dirname ${0}))"
+TRUT="${SCRIPT_DIR}/../bin/trut"
 
 
 ############################### Parse arguments ###############################
