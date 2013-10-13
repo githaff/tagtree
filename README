@@ -27,7 +27,7 @@ like:
 
 .trut/
 + meta
-+ files
++ storage
 | + <file-0-md5>
 | + <file-1-md5>
 | + <file-2-md5>
