@@ -101,7 +101,7 @@ TESTS=$(get_tests)
 
 for test in $(get_tests); do
     test_name="$(get_name ${test})"
-    LOGFILE="$(basename ${test} .sh).log"
+    LOGFILE="${SCRIPT_DIR}/$(basename ${test} .sh).log"
     echo -n "Performing ${test_name}..."
 
     TEST_DIR="$(init_tmp)"
