@@ -14,7 +14,7 @@ tagged files like with absolutely ordinary file structure: creating
 directories (which will be interpreted as tags and subtags), placing
 and moving files between different tags. The only thing you need once
 in a while update trut structure. All configurations and data will
-be stored in .tt/ directory;
+be stored in '.trut' directory;
 3. selected viewable tags will stay that way until you will manually
 choose to hide them (while in other tagging systems you need to look
 for needed tags each time).
@@ -22,10 +22,10 @@ for needed tags each time).
 
 STRUCTURE
 
-All meta information will be stored in .tt directory. It is organised
+All meta information will be stored in '.trut' directory. It is organised
 like:
 
-.tt/
+.trut/
 + meta
 + files
 | + <file-0-md5>
@@ -182,15 +182,15 @@ BASIC USAGE
 
 Initialise trut structure in current path:
 
-$ trut-cli init
+$ trut init
 
 Update trut structure according to the current directory content:
 
-$ trut-cli update
+$ trut update
 
 Hide tag:
 
-$ trut-cli hide <tag>
+$ trut hide <tag>
 
 This will delete directory <tag>. Files of this tag will still be
 there but you will see them only in .all directory if it exists. This
@@ -198,18 +198,11 @@ tag directory can be re-created again with next command.
 
 Show tag:
 
-$ trut-cli reveal <tag>
+$ trut reveal <tag>
 
 
 CONFIGURATION
 
 Trut configuration presented in several levels: global
 (/etc/trut.conf), user (~/.trut) and trut instance
-(<trut-dif>/.tt/config).
-
-
-HINTS
-
-Trut can be used with trut-cli utility. But for more convenient
-and fast access you can make alias in your shell to something like
-'ttcli' or 'tt'.
+(<trut-dir>/.trut/config).
