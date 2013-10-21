@@ -10,6 +10,7 @@ project (${PROJECT})
 set (SOURCES_DIR "src")
 set (INCLUDE_DIR "include")
 set (BUILD_DIR "bin")
+set (TESTS_DIR "tests")
 
 ### Project source files
 # common
@@ -25,6 +26,9 @@ set (SOURCES_LIB
   ${SOURCES_DIR}/init.c)
 set (HEADERS_LIB
   ${HEADERS})
+# tests
+set (TESTS_BIN
+  ${TESTS_DIR}/main.sh)
 
 include_directories (${INCLUDE_DIR})
 
@@ -41,3 +45,12 @@ set_target_properties (${PROJECT_CLI}
   PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY ${BUILD_DIR})
 target_link_libraries(${PROJECT_CLI} ${PROJECT_LIB})
+
+### Tests execution target
+add_custom_target ("tests"
+  DEPENDS ${PROJECT_CLI}
+  COMMENT "Running tests")
+add_custom_command (
+  COMMAND sh
+  ARGS ${TESTS_BIN}
+  TARGET "tests")

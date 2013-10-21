@@ -133,14 +133,12 @@ if [ -n "${OPT_MANUAL}" ]; then
     exit
 fi
 
-echo "Testing trut..."
-
 TESTS=$(get_tests)
 
 for test in $(get_tests); do
     test_name="$(get_name ${test})"
     LOGFILE="${SCRIPT_DIR}/$(basename ${test} .sh).log"
-    echo -n "Performing ${test_name}..."
+    echo -n "Running ${test_name}..."
 
     TEST_DIR="$(init_tmp)"
 
@@ -156,7 +154,7 @@ for test in $(get_tests); do
         if [ -z "${OPT_PRINT_LOG_OFF}" ]; then
             echo
             cat "${LOGFILE}" | indent_test
-            echo -n "Performing ${test_name}..."
+            echo -n "Running ${test_name}..."
         fi
         test_fail
     else
@@ -164,5 +162,4 @@ for test in $(get_tests); do
         test_done
         deinit_tmp
     fi
-
 done
