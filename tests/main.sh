@@ -66,6 +66,12 @@ test_fail () {
     echo -e "[\e[1;31mFAIL\e[0m]"
 }
 
+# Indent input test by 2 spaces
+indent_test () {
+    sed 's/^/  /'
+}
+
+
 
 SCRIPT_DIR="$(readlink -f $(dirname ${0}))"
 TRUT="${SCRIPT_DIR}/../bin/trut"
@@ -74,7 +80,7 @@ TRUT="${SCRIPT_DIR}/../bin/trut"
 ############################### Parse arguments ###############################
 
 parse_arguments () {
-    local TEMP=$(getopt -o hk -l help,keep -n "${UTIL_NAME}" -- "$@")
+    local TEMP=$(getopt -o hkn -l help,keep,no-print-log -n "${UTIL_NAME}" -- "$@")
     if [ $? != 0 ] ; then echo "Try '${UTIL_NAME} --h' for more information." >&2 ; exit 1 ; fi
     eval set -- "$TEMP"
     while true ; do
@@ -87,6 +93,10 @@ parse_arguments () {
                 OPT_KEEP=y
                 shift
                 ;;
+            -n|--no-print-log)
+                OPT_PRINT_LOG_OFF=y
+                shift
+                ;;
 	    --)
 	        shift
                 break
@@ -96,6 +106,7 @@ parse_arguments () {
 }
 
 ############################## Testing procedure ##############################
+
 
 parse_arguments $@
 clean_prev_tmp
@@ -119,6 +130,11 @@ for test in $(get_tests); do
             echo "Test environment accessible at ${TEST_DIR}" >> "${LOGFILE}"
         else
             deinit_tmp
+        fi
+        if [ -z "${OPT_PRINT_LOG_OFF}" ]; then
+            echo
+            cat "${LOGFILE}" | indent_test
+            echo -n "Performing ${test_name}..."
         fi
         test_fail
     else
