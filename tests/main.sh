@@ -25,6 +25,8 @@ Options
   -k, --keep     keep temporary directories of failed tests.
                  Directory name will be printed into logs
   -b, --brief    Do not print logs for failed tests
+  -m, --manual   Manual testing mode. Will create temporay dir for
+                 performing tests
 EOF
 }
 
@@ -41,6 +43,15 @@ init_tmp () {
 deinit_tmp () {
     rm -rf "${TEST_DIR}"
 }
+
+init_manual () {
+    local TEST_DIR=$(mktemp -d "/tmp/trut-tests-manual.XXXXXXXXXX")
+    cd "${SCRIPT_DIR}/root"
+    tar cf - . | (cd "${TEST_DIR}"; tar xf -)
+    cd "${OLDPWD}"
+    echo "${TEST_DIR}"
+}
+
 
 
 ## Get all tests
@@ -81,7 +92,7 @@ TRUT="${SCRIPT_DIR}/../bin/trut"
 ############################### Parse arguments ###############################
 
 parse_arguments () {
-    local TEMP=$(getopt -o hkb -l help,keep,brief -n "${UTIL_NAME}" -- "$@")
+    local TEMP=$(getopt -o hkbm -l help,keep,brief,manual -n "${UTIL_NAME}" -- "$@")
     if [ $? != 0 ] ; then echo "Try '${UTIL_NAME} --h' for more information." >&2 ; exit 1 ; fi
     eval set -- "$TEMP"
     while true ; do
@@ -98,6 +109,10 @@ parse_arguments () {
                 OPT_PRINT_LOG_OFF=y
                 shift
                 ;;
+            -m|--manual)
+                OPT_MANUAL=y
+                shift
+                ;;
 	    --)
 	        shift
                 break
@@ -111,6 +126,12 @@ parse_arguments () {
 
 parse_arguments $@
 clean_prev_tmp
+
+if [ -n "${OPT_MANUAL}" ]; then
+    TEST_DIR="$(init_manual)"
+    echo "${TEST_DIR}"
+    exit
+fi
 
 echo "Testing trut..."
 
