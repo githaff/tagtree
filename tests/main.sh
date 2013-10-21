@@ -24,6 +24,7 @@ Options
   -h, --help     show help
   -k, --keep     keep temporary directories of failed tests.
                  Directory name will be printed into logs
+  -b, --brief    Do not print logs for failed tests
 EOF
 }
 
@@ -80,7 +81,7 @@ TRUT="${SCRIPT_DIR}/../bin/trut"
 ############################### Parse arguments ###############################
 
 parse_arguments () {
-    local TEMP=$(getopt -o hkn -l help,keep,no-print-log -n "${UTIL_NAME}" -- "$@")
+    local TEMP=$(getopt -o hkb -l help,keep,brief -n "${UTIL_NAME}" -- "$@")
     if [ $? != 0 ] ; then echo "Try '${UTIL_NAME} --h' for more information." >&2 ; exit 1 ; fi
     eval set -- "$TEMP"
     while true ; do
@@ -93,7 +94,7 @@ parse_arguments () {
                 OPT_KEEP=y
                 shift
                 ;;
-            -n|--no-print-log)
+            -b|--brief)
                 OPT_PRINT_LOG_OFF=y
                 shift
                 ;;
