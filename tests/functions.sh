@@ -9,8 +9,9 @@ trut_copy_root () {
     ROOT_PATH="${1}"
     echo -n "Copying testing root from '${ROOT_PATH}'..."
     if [ -d "${ROOT_PATH}" ]; then
-        cp -rd "${ROOT_PATH}"/* .  || echo "FAIL"; exit 2
-        cp -rd "${ROOT_PATH}"/.* . || echo "FAIL"; exit 2
+        cd "${ROOT_PATH}"
+        tar cf - . | (cd "${TEST_DIR}"; tar xf -) || exit 2
+        cd "${OLDPWD}"
         echo "OK"
     else
         echo "FAIL"
