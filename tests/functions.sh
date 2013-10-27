@@ -10,12 +10,12 @@ trut_copy_root () {
     echo -n "Copying testing root from '${ROOT_PATH}'..."
     if [ -d "${ROOT_PATH}" ]; then
         cd "${ROOT_PATH}"
-        tar cf - . | (cd "${TEST_DIR}"; tar xf -) || exit 2
+        tar cf - . | (cd "${TEST_DIR}"; tar xf -) || return 1
         cd "${OLDPWD}"
         echo "OK"
     else
         echo "FAIL"
-        exit 1
+        return 1
     fi
 }
 
@@ -30,12 +30,12 @@ trut_init () {
 # @FILE_NAME --- files path relative to trut direcotry
 trut_check_file () {
     local FILE_NAME="${1}"
-    echo "Checking if file '${FILE_NAME}' exists..."
+    echo -n "Checking if file '${FILE_NAME}' exists..."
     if [ -d "${FILE_NAME}" ]; then
         echo "OK"
     else
         echo "FAIL"
-        exit 1
+        return 1
     fi
 }
 
@@ -48,7 +48,7 @@ trut_check_dir () {
         echo "OK"
     else
         echo "FAIL"
-        exit 1
+        return 1
     fi
 }
 

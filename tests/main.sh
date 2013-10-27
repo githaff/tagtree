@@ -145,7 +145,6 @@ for test in $(get_tests); do
     sh "${test}" "${TRUT_EXEC}" "${TEST_DIR}" > "${LOGFILE}" 2>&1 
     RETCODE=$?
     if [ ${RETCODE} != 0 ]; then
-        echo "Test failed with code ${RETCODE}" >> "${LOGFILE}"
         if [ -n "${OPT_KEEP}" ]; then
             echo "Test environment accessible at ${TEST_DIR}" >> "${LOGFILE}"
         else
