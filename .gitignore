@@ -15,4 +15,4 @@ install_manifest.txt
 # ignore build path
 bin
 # tests log files
-tests/*.log
+tests/log
