@@ -23,7 +23,12 @@ trut_copy_root () {
 trut_init () {
     echo -n "Initializing trut..."
     $TRUT init
-    echo "OK"
+    if [ $? != 0 ]; then
+        echo "FAIL"
+        return 1
+    else
+        echo "OK"
+    fi
 }
 
 # Check files existance
