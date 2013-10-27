@@ -117,9 +117,11 @@ if [ -n "${OPT_MANUAL}" ]; then
     exit
 fi
 
+mkdir -p "${SCRIPT_DIR}/log"
+
 for test in $(get_tests); do
     test_name="$(get_name ${test})"
-    LOGFILE="${SCRIPT_DIR}/$(basename ${test} .sh).log"
+    LOGFILE="${SCRIPT_DIR}/log/$(basename ${test} .sh).log"
     echo -n "Running ${test_name}..."
 
     sh "${test}" > "${LOGFILE}" 2>&1 
