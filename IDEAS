@@ -10,3 +10,6 @@
   wallpapers of certain tag) without actual trut-repo creation (for
   those who doesn not intend to use this system by it's primary
   function
+* journal for actiona performed. Binary changes will be too large so
+  it may be simply notes like "added file FILENAME to tag TAGNAME"
+  etc. Must be optional.
