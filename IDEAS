@@ -1,3 +1,7 @@
+* actual files must be separated into directories with names starting
+  on first symbols of md5 or something like this to escape the problem
+  with too long search for file by its md5 in fuuge directory;
+* some trick may be also required for the too large sqlite databases;
 * add special condition commands for reveal/create/alias like one
   which shows only files changed in last N minutes
 * trut-server must be used in form of:
