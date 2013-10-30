@@ -6,3 +6,7 @@
                          # Key --all makes download all data from server
   $ trut reveal <tag-expr>   # if repo is cloned and needed tags are not present
                              # on this machene will try to be downloaded from repo.
+* make possibility to use utility with plugins (like for downloading
+  wallpapers of certain tag) without actual trut-repo creation (for
+  those who doesn not intend to use this system by it's primary
+  function
