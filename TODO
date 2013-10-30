@@ -3,3 +3,7 @@
 * implement plugins framework;
 * perfomance tests on LARGE amount of tags (+comparison with other
   tagging software, particulary with FUSE-based like tagsistant);
+* think through case of identical files in different tags. When one is
+  changed the other also will be changed (if trut is already
+  updated). Anyway right after copying file to another location it may
+  be changed before tagging... need to pay attention;
