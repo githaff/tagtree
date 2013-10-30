@@ -1,3 +1,5 @@
 * add test for initializing on unsupported FS (which doesn't have hard
   links);
 * implement plugins framework;
+* perfomance tests on LARGE amount of tags (+comparison with other
+  tagging software, particulary with FUSE-based like tagsistant);
