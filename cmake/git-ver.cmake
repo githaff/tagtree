@@ -22,7 +22,8 @@ if (NOT GIT_TAG_VERSION)
     "Package should be built from correct source tree.")
   set (TRUT_VERSION_MAJOR 0)
   set (TRUT_VERSION_MINOR 0)
-  set (TRUT_VERSION "0.0")
+  set (TRUT_VERSION_PATCH 0)
+  set (TRUT_VERSION "0.0.0")
   set (TRUT_VERSION_FULL "unknown")
 else ()
   execute_process (COMMAND echo "${GIT_TAG_VERSION}"
@@ -30,15 +31,19 @@ else ()
     OUTPUT_VARIABLE TRUT_VERSION_MAJOR
     OUTPUT_STRIP_TRAILING_WHITESPACE)
   execute_process (COMMAND echo "${GIT_TAG_VERSION}"
-    COMMAND sed -ne "s/^v[[:digit:]]*\\.\\([[:digit:]]*\\).*/\\1/p"
+    COMMAND sed -ne "s/^v[[:digit:]]*\\.\\([[:digit:]]*\\)\\..*/\\1/p"
     OUTPUT_VARIABLE TRUT_VERSION_MINOR
+    OUTPUT_STRIP_TRAILING_WHITESPACE)
+  execute_process (COMMAND echo "${GIT_TAG_VERSION}"
+    COMMAND sed -ne "s/^v[[:digit:]]*\\.[[:digit:]]*\\.\\([[:digit:]]*\\).*/\\1/p"
+    OUTPUT_VARIABLE TRUT_VERSION_PATCH
     OUTPUT_STRIP_TRAILING_WHITESPACE)
   execute_process (COMMAND echo "${GIT_TAG_VERSION}"
     COMMAND sed -ne "s/.*-\\(.*\\)/\\1/p"
     OUTPUT_VARIABLE TRUT_VERSION_DIRT
     OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-  set (TRUT_VERSION "${TRUT_VERSION_MAJOR}.${TRUT_VERSION_MINOR}")
+  set (TRUT_VERSION "${TRUT_VERSION_MAJOR}.${TRUT_VERSION_MINOR}.${TRUT_VERSION_PATCH}")
   if (TRUT_VERSION_DIRT)
     set (TRUT_VERSION_FULL "${TRUT_VERSION}-${TRUT_VERSION_DIRT}")
   else ()
