@@ -1,23 +1,24 @@
-Trut is a simple tool for keeping data in tagged structures with
-use of hardlinks.
+Trut is a simple tool for keeping tagged data in simple directory tree
+structure with help of hardlinks.
 
-The main dedication is to keep files int the directory organised with
-some tags. So if you have for instance book 'Mathematical basics of
-physics' you can put it both into 'math' and 'physics' folders, the
-trut will find identical files and replace them with hard links.
+The main dedication is to keep files in the directory organised
+tags-subtags structure. So if you have book 'Mathematical basics of
+physics' you can put it both into 'math' and 'physics' folders, then
+trut will find identical files and replace them with hard links. Only
+one actual copy of book will be kept.
 
-The main advantages over many file-tagging frameworks is:
+The main advantages over other file-tagging frameworks are:
 1. you are not bound to certain DE or file manager which will show you
 needed tags;
-2. once tag tree is initialised the needed way you can operate with
-tagged files like with absolutely ordinary file structure: creating
-directories (which will be interpreted as tags and subtags), placing
-and moving files between different tags. The only thing you need once
-in a while update trut structure. All configurations and data will
-be stored in '.trut' directory;
+2. once tag tree is initialised you can operate with tagged files like
+with absolutely ordinary file structure: creating directories (which
+will be interpreted as tags and subtags), placing and moving files
+between different tags, copying to different storages. The only thing
+you need is to once in a while update trut structure;
 3. selected viewable tags will stay that way until you will manually
-choose to hide them (while in other tagging systems you need to look
-for needed tags each time).
+choose to hide them (while in other tagging systems normally you have
+to look amongst all possible tags whether they are currently needed or
+not).
 
 
 STRUCTURE
@@ -28,24 +29,24 @@ like:
 .trut/
 + meta
 + storage
-| + <file-0-md5>
-| + <file-1-md5>
-| + <file-2-md5>
-| + <file-3-md5>
+| + <file-0>
+| + <file-1>
+| + <file-2>
+| + <file-3>
 | + ...
 + config
 
-Here 'meta' file contains info about each file under trut control
-(its tags, description if there is such and else) and each tag (tag
-class, description if there is such and other). This file is organised
-in form of sqlite database.
+Here 'meta' file contains info about each file under trut control (its
+tags, description if there is such and else) and each tag (tag class,
+description if there is such and other). This file is organised in
+form of database.
 
-Files 'file-n-md5' are just files. It is the base in which all files
-are situated. The names are md5 made for this files last trut
-update.
+Files 'file-n' are just files. It is the base in which all files are
+situated. The names are md5 made for this files last trut update.
 
-Config file 'config' contains all current trut settings in simple
-text format.
+There is global system configuration file /etc/trut, global user
+config ~/.config/trut/config and local config in trut repo itself:
+<trut-repo>/.trut/config.
 
 
 COMMANDS
@@ -58,17 +59,16 @@ update [PATH] - update trut state. Register all changes (newly
     passed. In this case only files and tags placed there will be
     rechecked in tag tree.
 
-reveal TAG|TAG_EXPR - this will create directory TAG in current path
-    which will represent specified tag. It also will reveal all
-    subtags so
+reveal TAG|TAG_EXPR - create directory TAG in current path which will
+    represent specified tag. It also will reveal all subtags so
 
     $ trut reveal books
 
     will create directory 'book' with all subtags like 'datasheets',
     'languages' etc.
 
-    You also can reveal certain subtags like it is usual tags (which
-    it is).  To reveal only needed subtags in some tag one can use
+    To reveal only certain subtags you can specify full directory/tag
+    path of subtag:
 
     $ trut reveal TAG/SUBTAG
 
