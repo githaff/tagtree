@@ -16,3 +16,5 @@ set_target_properties (${PROJECT_CLI}
   RUNTIME_OUTPUT_DIRECTORY ${BUILD_DIR})
 target_link_libraries(${PROJECT_CLI} ${PROJECT})
 target_link_libraries (${PROJECT_CLI} ${EXTOPTS_LIBRARY})
+
+install (TARGETS ${PROJECT_CLI} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})

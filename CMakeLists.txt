@@ -21,15 +21,32 @@ if (NOT EXISTS "${BUILD_DIR}")
   file (MAKE_DIRECTORY "${BUILD_DIR}")
 endif()
 
-### Project source files
-## tests
-set (TESTS_BIN
-  ${TESTS_DIR}/main.sh)
-
 ### Version control
 include (git-ver)
 
 include_directories (${INCLUDE_DIR})
+
+## Installation paths if not specified
+if (NOT DEFINED CMAKE_INSTALL_BINDIR)
+  set (CMAKE_INSTALL_BINDIR "bin")
+endif (NOT DEFINED CMAKE_INSTALL_BINDIR)
+if (NOT DEFINED CMAKE_INSTALL_LIBDIR)
+  set (CMAKE_INSTALL_LIBDIR "lib")
+endif (NOT DEFINED CMAKE_INSTALL_LIBDIR)
+if (NOT DEFINED CMAKE_INSTALL_INCLUDEDIR)
+  set (CMAKE_INSTALL_INCLUDEDIR "include")
+endif (NOT DEFINED CMAKE_INSTALL_INCLUDEDIR)
+set (CMAKE_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/${PROJECT}")
+
+### Project source files
+## public include files
+set (HEADERS_PUBLIC
+  ${INCLUDE_DIR}/${PROJECT}/trut.h)
+install (FILES ${HEADERS_PUBLIC} DESTINATION
+  "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT}")
+## tests
+set (TESTS_BIN
+  ${TESTS_DIR}/main.sh)
 
 add_subdirectory (${SOURCES_DIR})
 add_subdirectory (${SOURCES_CLI_DIR})
@@ -50,8 +67,14 @@ install (FILES trut.pc
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 
 ### CMake find module generation
+set (TRUT_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")
+set (TRUT_LIB_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
 configure_file(trut-config.cmake.in trut-config.cmake @ONLY)
 configure_file(trut-config-version.cmake.in trut-config-version.cmake @ONLY)
+install (FILES trut-config.cmake
+  DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
+install (FILES trut-config-version.cmake
+  DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
 
 ### Packaging setup
 include (InstallRequiredSystemLibraries)
