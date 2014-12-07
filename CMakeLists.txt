@@ -2,49 +2,37 @@ cmake_minimum_required (VERSION 2.8)
 
 ### Name of whole complex
 set (PROJECT "trut")
-set (PROJECT_CLI "trut")
-set (PROJECT_LIB "trut-lib")
+set (PROJECT_CLI "trut-cli")
 project (${PROJECT})
 
+# Set compile parameters
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c11 -O0 -g3 -ggdb")
+# Set additional warnings
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wno-long-long -pedantic")
+
 ### Project directories
-set (SOURCES_DIR "src")
-set (INCLUDE_DIR "include")
-set (BUILD_DIR "bin")
-set (TESTS_DIR "tests")
+set (CMAKE_MODULE_PATH "cmake")
+set (SOURCES_DIR "${CMAKE_SOURCE_DIR}/src")
+set (SOURCES_CLI_DIR "${SOURCES_DIR}/cli")
+set (INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include")
+set (TESTS_DIR "${CMAKE_SOURCE_DIR}/tests")
+set (BUILD_DIR "${CMAKE_SOURCE_DIR}/build")
+if (NOT EXISTS "${BUILD_DIR}")
+  file (MAKE_DIRECTORY "${BUILD_DIR}")
+endif()
 
 ### Project source files
-# common
-set (HEADERS
-  ${INCLUDE_DIR}/${PROJECT}/init.h)
-# client
-set (SOURCES_CLI
-  ${SOURCES_DIR}/main.c)
-set (HEADERS_CLI
-  ${HEADERS})
-# library
-set (SOURCES_LIB
-  ${SOURCES_DIR}/init.c)
-set (HEADERS_LIB
-  ${HEADERS})
-# tests
+## tests
 set (TESTS_BIN
   ${TESTS_DIR}/main.sh)
 
+### Version control
+include (git-ver)
+
 include_directories (${INCLUDE_DIR})
 
-### Build library
-add_library (${PROJECT_LIB} SHARED ${SOURCES_LIB} ${HEADERS_LIB})
-set_target_properties(${PROJECT_LIB} PROPERTIES OUTPUT_NAME ${PROJECT}) 
-set_target_properties (${PROJECT_LIB}
-  PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY ${BUILD_DIR})
-
-### Build app
-add_executable (${PROJECT_CLI} ${SOURCES_CLI} ${HEADERS_CLI})
-set_target_properties (${PROJECT_CLI}
-  PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${BUILD_DIR})
-target_link_libraries(${PROJECT_CLI} ${PROJECT_LIB})
+add_subdirectory (${SOURCES_DIR})
+add_subdirectory (${SOURCES_CLI_DIR})
 
 ### Tests execution target
 add_custom_target ("tests"
