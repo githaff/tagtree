@@ -1,0 +1,6 @@
+# - Config file for the trut package
+get_filename_component(TRUT_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+set(TRUT_INCLUDE_DIR @TRUT_INCLUDE_DIR@)
+set(TRUT_LIBRARY @TRUT_LIB_DIR@/libtrut.so)
+set(TRUT_LIBRARIES @TRUT_LIB_DIR@/libtrut.so)

@@ -42,3 +42,13 @@ add_custom_command (
   COMMAND sh
   ARGS ${TESTS_BIN}
   TARGET "tests")
+
+### Pkg-config generation
+set(prefix ${CMAKE_INSTALL_PREFIX})
+configure_file(trut.pc.in trut.pc @ONLY)
+install (FILES trut.pc
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
+
+### CMake find module generation
+configure_file(trut-config.cmake.in trut-config.cmake @ONLY)
+configure_file(trut-config-version.cmake.in trut-config-version.cmake @ONLY)

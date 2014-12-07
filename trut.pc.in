@@ -1,0 +1,10 @@
+prefix=@prefix@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include/trut
+
+Name: libtrut
+Description: Advanced command line arguments parser
+Version: @TRUT_VERSION@
+Libs: -L${libdir} -ltrut
+Cflags: -I${includedir}
