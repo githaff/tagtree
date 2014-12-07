@@ -52,3 +52,36 @@ install (FILES trut.pc
 ### CMake find module generation
 configure_file(trut-config.cmake.in trut-config.cmake @ONLY)
 configure_file(trut-config-version.cmake.in trut-config-version.cmake @ONLY)
+
+### Packaging setup
+include (InstallRequiredSystemLibraries)
+set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "Trut tagging utility")
+set (CPACK_PACKAGE_VENDOR "haff")
+set (CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
+set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set (CPACK_PACKAGE_VERSION_MAJOR "${TRUT_VERSION_MAJOR}")
+set (CPACK_PACKAGE_VERSION_MINOR "${TRUT_VERSION_MINOR}")
+set (CPACK_PACKAGE_VERSION_PATCH "${TRUT_VERSION_PATCH}")
+set (CPACK_SOURCE_GENERATOR "TGZ")
+set (CPACK_SOURCE_PACKAGE_FILE_NAME
+  "${CMAKE_PROJECT_NAME}-${TRUT_VERSION_FULL}")
+set (CPACK_SOURCE_IGNORE_FILES
+  ".*~"
+  "#.*#"
+  ".*.tar.gz"
+  ".*.pc$"
+  "/.git"
+  "/build"
+  "/_CPack_Packages"
+  ".gitignore"
+  "CMakeCache.txt"
+  "CMakeFiles"
+  "CPackConfig.cmake"
+  "CPackSourceConfig.cmake"
+  "Makefile"
+  "cmake_install.cmake"
+  "install_manifest.txt"
+)
+include (CPack)
+## Add alias to default 'dist' target
+add_custom_target (dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
