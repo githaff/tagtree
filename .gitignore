@@ -13,6 +13,9 @@ install_manifest.txt
 
 ### Other
 # ignore build path
+*-config-version.cmake
+*-config.cmake
+*.pc
 /build
 config.h
 # tests log files
