@@ -4,18 +4,17 @@
 ### source is not under source control - take from .version
 ### file. Otherwise current version is 0.0
 
+## Get version
 if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
   execute_process (COMMAND git describe
     OUTPUT_VARIABLE GIT_TAG_VERSION)
-  if (GIT_TAG_VERSION)
-    file (WRITE .version "${GIT_TAG_VERSION}")
-  endif ()
 else ()
   if (EXISTS "${CMAKE_SOURCE_DIR}/.version")
     execute_process (COMMAND cat .version
       OUTPUT_VARIABLE GIT_TAG_VERSION)
   endif ()
 endif ()
+
 ## Parse version
 if (NOT GIT_TAG_VERSION)
   message (WARNING "No version information was found! "
@@ -23,8 +22,6 @@ if (NOT GIT_TAG_VERSION)
   set (TRUT_VERSION_MAJOR 0)
   set (TRUT_VERSION_MINOR 0)
   set (TRUT_VERSION_PATCH 0)
-  set (TRUT_VERSION "0.0.0")
-  set (TRUT_VERSION_FULL "unknown")
 else ()
   execute_process (COMMAND echo "${GIT_TAG_VERSION}"
     COMMAND sed -ne "s/^v\\([[:digit:]]*\\)\\..*/\\1/p"
@@ -42,13 +39,17 @@ else ()
     COMMAND sed -ne "s/.*-\\(.*\\)/\\1/p"
     OUTPUT_VARIABLE TRUT_VERSION_DIRT
     OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-  set (TRUT_VERSION "${TRUT_VERSION_MAJOR}.${TRUT_VERSION_MINOR}.${TRUT_VERSION_PATCH}")
-  if (TRUT_VERSION_DIRT)
-    set (TRUT_VERSION_FULL "${TRUT_VERSION}-${TRUT_VERSION_DIRT}")
-  else ()
-    set (TRUT_VERSION_FULL "${TRUT_VERSION}")
-  endif ()
-  
-  message (STATUS "Building version: ${TRUT_VERSION_FULL}")
 endif ()
+
+## Compose version strings
+set (TRUT_VERSION "${TRUT_VERSION_MAJOR}.${TRUT_VERSION_MINOR}.${TRUT_VERSION_PATCH}")
+if (TRUT_VERSION_DIRT)
+  set (TRUT_VERSION_FULL "${TRUT_VERSION}-${TRUT_VERSION_DIRT}")
+else ()
+  set (TRUT_VERSION_FULL "${TRUT_VERSION}")
+endif ()
+
+## Create version file
+file (WRITE .version "v${TRUT_VERSION_FULL}")
+
+message (STATUS "Building version: ${TRUT_VERSION_FULL}")
