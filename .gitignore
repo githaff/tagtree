@@ -13,6 +13,7 @@ install_manifest.txt
 
 ### Other
 # ignore build path
-bin
+/build
+config.h
 # tests log files
 tests/log
