@@ -15,12 +15,14 @@ CPackConfig.cmake
 CPackSourceConfig.cmake
 _CPack_Packages
 
-### Other
-# ignore build path
+### Build results
+/build
 *-config-version.cmake
 *-config.cmake
 *.pc
-/build
 config.h
-# tests log files
+*.tar.gz
+.version
+
+### Other
 tests/log
