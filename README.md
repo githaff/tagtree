@@ -102,7 +102,7 @@ contain only current slice of files that satisfy specified tag
 expression.
 
 Options:
-    --as NAME  Reveal tag with specified pseudonym
+  * --as NAME  Reveal tag with specified pseudonym
 
 
 **hide TAG** - apposite to 'reveal' command. Deletes tag directory but
@@ -148,15 +148,15 @@ tag (or in top-level).
 value.
 
 Options:
-    --global - change global tatree options instead of local to
+  * --global - change global tatree options instead of local to
                    particular tone instance.
 
 **show [TAG]** - show info about specified tag (subtags, files owned,
 date of creation).
 
 Options:
-    --all - print all available info
-    --files - print all files contained in this tag
+  * --all - print all available info
+  * --files - print all files contained in this tag
 
 **help [COMMAND]** - show this help. If command specified - print help
 for it.
@@ -189,15 +189,15 @@ not belong to tag-2. Added file will be added to tag-1.
 
 Initialise tone structure in current path:
 
-'$ tone init'
+`$ tone init`
 
 Update tone structure according to the current directory content:
 
-'$ tone update'
+`$ tone update`
 
 Hide tag:
 
-'$ tone hide TAG'
+`$ tone hide TAG`
 
 This will delete directory <tag>. Files of this tag will still be
 there but you will see them only in .all directory if it exists. This
@@ -205,7 +205,7 @@ tag directory can be re-created again with next command.
 
 Show tag:
 
-'$ tone reveal TAG'
+`$ tone reveal TAG`
 
 
 # Configuration
