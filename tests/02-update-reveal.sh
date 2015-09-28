@@ -5,7 +5,7 @@
 TEST_NAME="Reveal command test"
 
 SCRIPT_DIR="$(readlink -f $(dirname ${0}))"
-TRUT="${SCRIPT_DIR}/../bin/trut"
+TONE="${SCRIPT_DIR}/../bin/tone"
 
 source "${SCRIPT_DIR}/common.sh"
 source "${SCRIPT_DIR}/functions.sh"

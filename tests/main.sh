@@ -5,14 +5,14 @@
 # - be presented as XX-*.sh file (where XX is number);
 # - if needed use 'root' directory as default root for tagging
 # - if special testing root is needed use XX-* (same as script name)
-# - do not rely on some state, reinitialize trut for each test;
+# - do not rely on some state, reinitialize tone for each test;
 
 UTIL_NAME=$(basename $0)
 
 usage () {
 cat <<EOF
 Usage: ${UTIL_NAME} OPTIONS
-Test suite for trut utility.
+Test suite for tone utility.
 
 Options
   -h, --help     show help
@@ -27,12 +27,12 @@ EOF
 
 ## Manage temporary directory for testing
 clean_prev_tmp () {
-    rm -rf "/tmp/trut-tests."*
+    rm -rf "/tmp/tone-tests."*
 }
 
 ## Manually create special testing directory with default root in it
 init_manual () {
-    local TEST_DIR=$(mktemp -d "/tmp/trut-tests-manual.XXXXXXXXXX")
+    local TEST_DIR=$(mktemp -d "/tmp/tone-tests-manual.XXXXXXXXXX")
     cd "${SCRIPT_DIR}/root"
     tar cf - . | (cd "${TEST_DIR}"; tar xf -)
     cd "${OLDPWD}"

@@ -101,7 +101,7 @@ test_finalize () {
 ############################### MISC ###############################
 
 init_tmpdir () {
-    mktemp -d "/tmp/trut-tests.XXXXXXXXXX"
+    mktemp -d "/tmp/tone-tests.XXXXXXXXXX"
 }
 
 deinit_tmpdir () {

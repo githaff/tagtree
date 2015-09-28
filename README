@@ -1,10 +1,10 @@
-Trut is a simple tool for keeping tagged data in simple directory tree
-structure with help of hardlinks.
+Tone (The Tagged One) is a simple tool for keeping tagged data in
+simple directory tree structure with help of hardlinks.
 
 The main dedication is to keep files in the directory organised
 tags-subtags structure. So if you have book 'Mathematical basics of
 physics' you can put it both into 'math' and 'physics' folders, then
-trut will find identical files and replace them with hard links. Only
+tone will find identical files and replace them with hard links. Only
 one actual copy of book will be kept.
 
 The main advantages over other file-tagging frameworks are:
@@ -14,7 +14,7 @@ needed tags;
 with absolutely ordinary file structure: creating directories (which
 will be interpreted as tags and subtags), placing and moving files
 between different tags, copying to different storages. The only thing
-you need is to once in a while update trut structure;
+you need is to once in a while update tone structure;
 3. selected viewable tags will stay that way until you will manually
 choose to hide them (while in other tagging systems normally you have
 to look amongst all possible tags whether they are currently needed or
@@ -23,10 +23,10 @@ not).
 
 STRUCTURE
 
-All meta information will be stored in '.trut' directory. It is organised
+All meta information will be stored in '.tone' directory. It is organised
 like:
 
-.trut/
+.tone/
 + meta
 + storage
 | + <file-0>
@@ -36,25 +36,25 @@ like:
 | + ...
 + config
 
-Here 'meta' file contains info about each file under trut control (its
+Here 'meta' file contains info about each file under tone control (its
 tags, description if there is such and else) and each tag (tag class,
 description if there is such and other). This file is organised in
 form of database.
 
 Files 'file-n' are just files. It is the base in which all files are
-situated. The names are md5 made for this files last trut update.
+situated. The names are md5 made for this files last tone update.
 
-There is global system configuration file /etc/trut, global user
-config ~/.config/trut/config and local config in trut repo itself:
-<trut-repo>/.trut/config.
+There is global system configuration file /etc/tone, global user
+config ~/.config/tone/config and local config in tone repo itself:
+<tone-repo>/.tone/config.
 
 
 COMMANDS
 
-init - initialize trut in current directory. All files will be
+init - initialize tone in current directory. All files will be
     automaitcly registered and tags for each directory will be created.
 
-update [PATH] - update trut state. Register all changes (newly
+update [PATH] - update tone state. Register all changes (newly
     added and removed files/tags). Optionally path to update may be
     passed. In this case only files and tags placed there will be
     rechecked in tag tree.
@@ -62,7 +62,7 @@ update [PATH] - update trut state. Register all changes (newly
 reveal TAG|TAG_EXPR - create directory TAG in current path which will
     represent specified tag. It also will reveal all subtags so
 
-    $ trut reveal books
+    $ tone reveal books
 
     will create directory 'book' with all subtags like 'datasheets',
     'languages' etc.
@@ -70,12 +70,12 @@ reveal TAG|TAG_EXPR - create directory TAG in current path which will
     To reveal only certain subtags you can specify full directory/tag
     path of subtag:
 
-    $ trut reveal TAG/SUBTAG
+    $ tone reveal TAG/SUBTAG
 
     For instance
 
-    $ trut reveal books/datasheets
-    $ trut reveal books/languages
+    $ tone reveal books/datasheets
+    $ tone reveal books/languages
 
     will create only 'datasheets' and 'languages' in directory 'books'
     without other subtags like 'fiction' or 'math'.
@@ -86,13 +86,13 @@ reveal TAG|TAG_EXPR - create directory TAG in current path which will
     'literature' which will contain both 'fiction' and 'fantasy' one
     can use:
 
-    $ trut reveal --as literature fiction -a fantasy
+    $ tone reveal --as literature fiction -a fantasy
 
     You can see full description of binary operations with tags in
     section 'Tag expressions'.
 
     Note that this way of revealing created through expressions tags
-    isn't permanent, it will be terminated after first 'trut hide'
+    isn't permanent, it will be terminated after first 'tone hide'
     on this tag. To use permanent expression-originated tags one can
     use 'alias' command. It is also possible to use 'create' in case
     new tag must contain only current slice of files that satisfy
@@ -110,7 +110,7 @@ alias ALIAS_NAME TAG_EXPR - create alias for tag expression. Created
     periodical 'update' command calls of course). For example if you
     have file-1.txt in tag-1 and file-2.txt in tag-2 then after
 
-    $ trut alias tag-new tag-1 -a tag-2
+    $ tone alias tag-new tag-1 -a tag-2
 
     created tag-new will contain both tag-1 and tag-2. In case you
     will place new file file-3.txt into tag-1 after update it will
@@ -122,7 +122,7 @@ create TAG_NAME [TAG_EXPR] - create new tag based on specified tag
     files that satisfy tag expression. In comparison with 'alias' if
     you have file-1.txt in tag-1 and file-2.txt in tag-2 then after
 
-    $ trut create tag-new tag-1 -a tag-2
+    $ tone create tag-new tag-1 -a tag-2
 
     you will have also both file-1.txt and file-2.txt in created
     tag-new tag. But if you will add file-3.txt to tag-1 it will not
@@ -133,17 +133,17 @@ create TAG_NAME [TAG_EXPR] - create new tag based on specified tag
 
 destroy TAG... - fully destroy specified tag. It will not be possible
     to resurrect it with 'reveal' afterwords. Files that was stored
-    only in deleted tag will be deleted from trut completly.  More
+    only in deleted tag will be deleted from tone completly.  More
     that one tag can be passed for destruction. Destruction of tag
     means also destruction of all subtags if they are not parented by
     some other tag (or in top-level).
 
-config VARIABLE VALUE - customize trut by specifying value for all
+config VARIABLE VALUE - customize tone by specifying value for all
     customizing variables.
 
     Options:
         --global - change global tatree options instead of local to
-                   particular trut instance.
+                   particular tone instance.
 
 show [TAG] - show info about specified tag (subtags, files owned, date
     of creation).
@@ -180,17 +180,17 @@ tag-2. Added file will be added to tag-1.
 
 BASIC USAGE
 
-Initialise trut structure in current path:
+Initialise tone structure in current path:
 
-$ trut init
+$ tone init
 
-Update trut structure according to the current directory content:
+Update tone structure according to the current directory content:
 
-$ trut update
+$ tone update
 
 Hide tag:
 
-$ trut hide <tag>
+$ tone hide <tag>
 
 This will delete directory <tag>. Files of this tag will still be
 there but you will see them only in .all directory if it exists. This
@@ -198,11 +198,11 @@ tag directory can be re-created again with next command.
 
 Show tag:
 
-$ trut reveal <tag>
+$ tone reveal <tag>
 
 
 CONFIGURATION
 
-Trut configuration presented in several levels: global
-(/etc/trut.conf), user (~/.trut) and trut instance
-(<trut-dir>/.trut/config).
+Tone configuration presented in several levels: global
+(/etc/tone.conf), user (~/.tone) and tone instance
+(<tone-dir>/.tone/config).

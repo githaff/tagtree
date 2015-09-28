@@ -1,11 +1,11 @@
 #!/bin/sh
 
-### Trut testing functions ###
+### Tone testing functions ###
 
 
-# Copy testing root into trut directory
+# Copy testing root into tone directory
 # @ROOT_PATH --- full path to testing root directory
-trut_copy_root () {
+tone_copy_root () {
     ROOT_PATH="$1"
     echo -n "Copying testing root from '${ROOT_PATH}'..."
     if [ -d "${ROOT_PATH}" ]; then
@@ -19,10 +19,10 @@ trut_copy_root () {
     fi
 }
 
-# Initialize trut
-trut_init () {
-    echo -n "Initializing trut..."
-    $TRUT init
+# Initialize tone
+tone_init () {
+    echo -n "Initializing tone..."
+    $TONE init
     if [ $? != 0 ]; then
         echo "FAIL"
         return 1
@@ -32,8 +32,8 @@ trut_init () {
 }
 
 # Check files existance
-# @FILE_NAME --- files path relative to trut direcotry
-trut_check_file () {
+# @FILE_NAME --- files path relative to tone direcotry
+tone_check_file () {
     local FILE_NAME="$1"
     echo -n "Checking if file '${FILE_NAME}' exists..."
     if [ -f "${FILE_NAME}" ]; then
@@ -45,8 +45,8 @@ trut_check_file () {
 }
 
 # Check directory existance
-# @DIR_NAME --- files path relative to trut direcotry
-trut_check_dir () {
+# @DIR_NAME --- files path relative to tone direcotry
+tone_check_dir () {
     local DIR_NAME="$1"
     echo -n "Checking if directory '${DIR_NAME}' exists..."
     if [ -d "${DIR_NAME}" ]; then

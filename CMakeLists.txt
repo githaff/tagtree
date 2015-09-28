@@ -1,8 +1,8 @@
 cmake_minimum_required (VERSION 2.8)
 
 ### Name of whole complex
-set (PROJECT "trut")
-set (PROJECT_CLI "trut-cli")
+set (PROJECT "tone")
+set (PROJECT_CLI "tone-cli")
 project (${PROJECT})
 
 # Set compile parameters
@@ -41,7 +41,7 @@ set (CMAKE_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/${PROJECT}")
 ### Project source files
 ## public include files
 set (HEADERS_PUBLIC
-  ${INCLUDE_DIR}/${PROJECT}/trut.h)
+  ${INCLUDE_DIR}/${PROJECT}/tone.h)
 install (FILES ${HEADERS_PUBLIC} DESTINATION
   "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT}")
 ## tests
@@ -62,32 +62,32 @@ add_custom_command (
 
 ### Pkg-config generation
 set(prefix ${CMAKE_INSTALL_PREFIX})
-configure_file(trut.pc.in trut.pc @ONLY)
-install (FILES trut.pc
+configure_file(tone.pc.in tone.pc @ONLY)
+install (FILES tone.pc
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 
 ### CMake find module generation
-set (TRUT_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")
-set (TRUT_LIB_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
-configure_file(trut-config.cmake.in trut-config.cmake @ONLY)
-configure_file(trut-config-version.cmake.in trut-config-version.cmake @ONLY)
-install (FILES trut-config.cmake
+set (TONE_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")
+set (TONE_LIB_DIR "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+configure_file(tone-config.cmake.in tone-config.cmake @ONLY)
+configure_file(tone-config-version.cmake.in tone-config-version.cmake @ONLY)
+install (FILES tone-config.cmake
   DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
-install (FILES trut-config-version.cmake
+install (FILES tone-config-version.cmake
   DESTINATION ${CMAKE_INSTALL_CMAKEDIR})
 
 ### Packaging setup
 include (InstallRequiredSystemLibraries)
-set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "Trut tagging utility")
+set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "Tone tagging utility")
 set (CPACK_PACKAGE_VENDOR "haff")
 set (CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README")
 set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
-set (CPACK_PACKAGE_VERSION_MAJOR "${TRUT_VERSION_MAJOR}")
-set (CPACK_PACKAGE_VERSION_MINOR "${TRUT_VERSION_MINOR}")
-set (CPACK_PACKAGE_VERSION_PATCH "${TRUT_VERSION_PATCH}")
+set (CPACK_PACKAGE_VERSION_MAJOR "${TONE_VERSION_MAJOR}")
+set (CPACK_PACKAGE_VERSION_MINOR "${TONE_VERSION_MINOR}")
+set (CPACK_PACKAGE_VERSION_PATCH "${TONE_VERSION_PATCH}")
 set (CPACK_SOURCE_GENERATOR "TGZ")
 set (CPACK_SOURCE_PACKAGE_FILE_NAME
-  "${CMAKE_PROJECT_NAME}-${TRUT_VERSION_FULL}")
+  "${CMAKE_PROJECT_NAME}-${TONE_VERSION_FULL}")
 set (CPACK_SOURCE_IGNORE_FILES
   ".*~"
   "#.*#"

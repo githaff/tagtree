@@ -4,14 +4,14 @@
 * some trick may be also required for the too large sqlite databases;
 * add special condition commands for reveal/create/alias like one
   which shows only files changed in last N minutes
-* trut-server must be used in form of:
+* tone-server must be used in form of:
 
-  $ trut clone <addr>    # here only control data is cloned.
+  $ tone clone <addr>    # here only control data is cloned.
                          # Key --all makes download all data from server
-  $ trut reveal <tag-expr>   # if repo is cloned and needed tags are not present
+  $ tone reveal <tag-expr>   # if repo is cloned and needed tags are not present
                              # on this machene will try to be downloaded from repo.
 * make possibility to use utility with plugins (like for downloading
-  wallpapers of certain tag) without actual trut-repo creation (for
+  wallpapers of certain tag) without actual tone-repo creation (for
   those who doesn not intend to use this system by it's primary
   function
 * journal for actiona performed. Binary changes will be too large so

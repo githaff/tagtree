@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-#include "trut/trut.h"
+#include "tone/tone.h"
 
 
 void func()
 {
-    printf("Print trut library UUU from include %s\n", PUBLIC_DEF);
+    printf("Print tone library UUU from include %s\n", PUBLIC_DEF);
 }

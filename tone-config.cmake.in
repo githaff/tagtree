@@ -1,0 +1,6 @@
+# - Config file for the tone package
+get_filename_component(TONE_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+
+set(TONE_INCLUDE_DIR @TONE_INCLUDE_DIR@)
+set(TONE_LIBRARY @TONE_LIB_DIR@/libtone.so)
+set(TONE_LIBRARIES @TONE_LIB_DIR@/libtone.so)

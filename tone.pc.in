@@ -1,10 +1,10 @@
 prefix=@prefix@
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
-includedir=${prefix}/include/trut
+includedir=${prefix}/include/tone
 
-Name: libtrut
+Name: libtone
 Description: Advanced command line arguments parser
-Version: @TRUT_VERSION@
-Libs: -L${libdir} -ltrut
+Version: @TONE_VERSION@
+Libs: -L${libdir} -ltone
 Cflags: -I${includedir}

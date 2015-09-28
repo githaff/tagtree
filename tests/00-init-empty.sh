@@ -5,7 +5,7 @@
 TEST_NAME="Initialization test"
 
 SCRIPT_DIR="$(readlink -f $(dirname ${0}))"
-TRUT="${SCRIPT_DIR}/../bin/trut"
+TONE="${SCRIPT_DIR}/../bin/tone"
 
 source "${SCRIPT_DIR}/common.sh"
 source "${SCRIPT_DIR}/functions.sh"
@@ -16,14 +16,14 @@ test_init $@
 ############################# Test body #############################
 
 # Initialize empty tagtree
-trut_init || err_init
+tone_init || err_init
 
 #err_init
-# Check all '.trut' files
-trut_check_dir ".trut"         || err
-trut_check_dir ".trut/storage" || err
-trut_check_file ".trut/meta"   || err
-trut_check_file ".trut/config" || err
+# Check all '.tone' files
+tone_check_dir ".tone"         || err
+tone_check_dir ".tone/storage" || err
+tone_check_file ".tone/meta"   || err
+tone_check_file ".tone/config" || err
 
 
 ############################# Test exit #############################
