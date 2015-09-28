@@ -10,15 +10,15 @@ tone will find identical files and replace them with hard links. Only
 one actual copy of book will be kept.
 
 The main advantages over other file-tagging frameworks are:
-  1. you are not bound to certain OS, DE or file manager which will
-show you needed tags. All you need to go is hardlink-compatible
-filesystem;
-  2. once tag tree is initialised you can operate with tagged files
-like with absolutely ordinary files structure: creating directories
-(which will be interpreted as tags and subtags), placing and moving
-files between different tags, copying to different storages. The only
-thing you need is to once in a while update tone structure;
-  3. selected viewable tags will stay that way until you will manually
+
+1. you are not bound to certain OS, DE or file manager which will show
+you needed tags. All you need to go is hardlink-compatible filesystem;
+2. once tag tree is initialised you can operate with tagged files like
+with absolutely ordinary files structure: creating directories (which
+will be interpreted as tags and subtags), placing and moving files
+between different tags, copying to different storages. The only thing
+you need is to once in a while update tone structure;
+3. selected viewable tags will stay that way until you will manually
 choose to hide them (while in other tagging systems normally you have
 to look amongst all possible tags whether they are currently needed or
 not).
@@ -102,7 +102,7 @@ contain only current slice of files that satisfy specified tag
 expression.
 
 Options:
-  * --as NAME  Reveal tag with specified pseudonym
+* --as NAME  Reveal tag with specified pseudonym
 
 
 **hide TAG** - apposite to 'reveal' command. Deletes tag directory but
@@ -148,15 +148,15 @@ tag (or in top-level).
 value.
 
 Options:
-  * --global - change global tatree options instead of local to
-                   particular tone instance.
+* --global - change global tatree options instead of local to
+particular tone instance.
 
 **show [TAG]** - show info about specified tag (subtags, files owned,
 date of creation).
 
 Options:
-  * --all - print all available info
-  * --files - print all files contained in this tag
+* --all - print all available info
+* --files - print all files contained in this tag
 
 **help [COMMAND]** - show this help. If command specified - print help
 for it.
@@ -208,7 +208,7 @@ Show tag:
 `$ tone reveal TAG`
 
 
-# Configuration
+## Configuration
 
 Tone configuration is presented in several levels: global
 (/etc/tone.conf), user (~/.config/tone/config) and tone instance
