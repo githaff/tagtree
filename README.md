@@ -29,6 +29,7 @@ not).
 All meta information is stored in '.tone' directory. It is organised
 in following way:
 
+```
 .tone/
 + meta
 + storage
@@ -38,6 +39,7 @@ in following way:
 | + <file-3>
 | + ...
 + config
+```
 
 Here 'meta' file contains info about each file under tone control (its
 tags, description if there is such and else) and each tag (tag class,
@@ -74,8 +76,10 @@ of subtag:
 
 For instance
 
-`$ tone reveal books/datasheets`
-`$ tone reveal books/languages`
+```
+$ tone reveal books/datasheets
+$ tone reveal books/languages
+```
 
 will show only 'datasheets' and 'languages' in directory 'books'
 without other subtags like 'fiction' or 'math'.
